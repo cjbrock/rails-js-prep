@@ -5,14 +5,14 @@ class PostsController < ApplicationController
     @posts = Post.all
     respond_to do |f|
       f.html {render :index}
-      f.json {render @posts}
+      f.json {render json: @posts}
     end
   end
 
   def show
     respond_to do |f|
       f.html {render :show}
-      f.json {render @post}
+      f.json {render json: @post}
     end
   end
 
