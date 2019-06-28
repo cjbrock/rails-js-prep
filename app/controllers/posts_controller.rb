@@ -3,9 +3,17 @@ class PostsController < ApplicationController
 
   def index
     @posts = Post.all
+    respond_to do |f|
+      f.html {render :index}
+      f.json {render @posts}
+    end
   end
 
   def show
+    respond_to do |f|
+      f.html {render :show}
+      f.json {render @post}
+    end
   end
 
   def new
@@ -18,16 +26,23 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     if @post.save
-      redirect_to @post, notice: 'Post was successfully created.'
+      respond_to do |f|
+        f.html {redirect_to @post, notice: 'Post was successfully created.'}
+        f.json {render json @post}
+      end
     else
       render :new
     end
   end
+  
 
 
   def update
     if @post.update(post_params)
-      redirect_to @post, notice: 'Post was successfully updated.'
+      respond_to do |f|
+        f.html {redirect_to @post, notice: 'Post was successfully updated.'}
+        f.json {render json @post}
+      end
     else
       render :edit
     end
@@ -36,7 +51,10 @@ class PostsController < ApplicationController
 
   def destroy
     @post.destroy
-    redirect_to posts_url, notice: 'Post was successfully destroyed.'
+    respond_to do |f|
+      f.html {redirect_to posts_url, notice: 'Post was successfully destroyed.'}
+      f.json {head :no_content}
+    end
   end
 
   private
