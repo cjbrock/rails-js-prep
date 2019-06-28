@@ -29,14 +29,21 @@ class Post {
     this.title = obj.title
     this.content = obj.content
     this.comments = obj.comments
+    debugger
   }
 }
 
 Post.prototype.postHTML = function () {
+  let postComments = this.comments.map(comment => {
+    return (`
+      <p>${comment.content}</p>
+      `)
+  }).join('')
   return (`
     <div>
       <h3>${this.title}</h3>
       <p>${this.content}</p>
+      <p>${postComments}<p?
     </div>
   `)
 }

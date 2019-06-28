@@ -28,7 +28,7 @@ class PostsController < ApplicationController
     if @post.save
       respond_to do |f|
         f.html {redirect_to @post, notice: 'Post was successfully created.'}
-        f.json {render json @post}
+        f.json {render json: @post}
       end
     else
       render :new
@@ -41,7 +41,7 @@ class PostsController < ApplicationController
     if @post.update(post_params)
       respond_to do |f|
         f.html {redirect_to @post, notice: 'Post was successfully updated.'}
-        f.json {render json @post}
+        f.json {render json: @post}
       end
     else
       render :edit
